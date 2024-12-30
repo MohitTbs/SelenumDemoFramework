@@ -1,21 +1,37 @@
 package base.driver;
 
-import base.*;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.Status;
+import java.io.IOException;
+import java.net.MalformedURLException;
+
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
+
+import base.App;
+import base.ExtentManager;
+import base.ExtentReport;
+import base.Util;
 
 public class BaseTest {
     WebDriverWait wait;
     //WebDriver driver = null;
-
+    
+    
+    @BeforeSuite
+    public void setUpLogs() {
+    	Util.getLogger();
+    }
+   
     @Parameters({"browser"})
     //@BeforeClass
     @BeforeMethod
@@ -27,6 +43,8 @@ public class BaseTest {
          *You can change the default value of browser=chrome by passing the browser
          * from maven command line as mvn test -Dbrowser=firefox
          */
+    	
+    	Util.logger.info(result.getMethod().getMethodName()+ "--Started");
         if(browser == null){
             browser = App.browser;
         }
@@ -53,7 +71,7 @@ public class BaseTest {
 
     @AfterMethod
     public void SparktestResult(ITestResult result) throws IOException {
-        if(!result.isSuccess()){
+        if(result.getStatus() == ITestResult.FAILURE){
             ExtentReport.getTest().log(Status.FAIL, "test case failed as - " +
                     result.getThrowable());
             String screenshotPath = Util.getScreenshot(result.getMethod().getMethodName()+".jpg");
@@ -65,7 +83,13 @@ public class BaseTest {
             ExtentReport.getTest().fail(MediaEntityBuilder
                     .createScreenCaptureFromBase64String(Util.convertImg_Base64(screenshotPath)).build());
             
-           
+            Util.logger.info(result.getMethod().getMethodName()+ "--Failed");
+        }else{
+        	if(result.getStatus() == ITestResult.SUCCESS) {
+        		Util.logger.info(result.getMethod().getMethodName()+ "--Passed");
+        	}else if(result.getStatus() == ITestResult.SKIP) {
+        		Util.logger.info(result.getMethod().getMethodName()+ "--Skipped");
+        	}
         }
         
         if(PageDriver.getCurrentDriver() != null) {

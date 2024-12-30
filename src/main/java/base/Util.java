@@ -1,15 +1,24 @@
 package base;
 
-import base.driver.PageDriver;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
+import base.driver.PageDriver;
+
 public class Util {
+	
+	public static Logger logger;
+	
+	public static void getLogger() {
+		logger = LogManager.getLogger(Util.class);
+	}
 
 	// applicable for all browser, but takes screnshot only the visible portion of
 	// the browser

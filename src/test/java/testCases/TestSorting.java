@@ -18,7 +18,7 @@ public class TestSorting extends BaseTest{
 	public void Test_PriceSortingAscending() throws Exception {
 		ProductsPage productPage = new ProductsPage();
 		LoginPage loginPage = new LoginPage();
-
+		Util.logger.info("Hello there");
 		loginPage.login(); // valid login
 		Thread.sleep(2000);
 

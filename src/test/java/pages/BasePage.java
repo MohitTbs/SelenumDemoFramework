@@ -1,6 +1,8 @@
 package pages;
 
 import base.driver.PageDriver;
+
+import org.apache.logging.log4j.core.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
