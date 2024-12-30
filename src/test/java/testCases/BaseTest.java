@@ -1,4 +1,4 @@
-package base.driver;
+package testCases;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -21,6 +21,8 @@ import base.App;
 import base.ExtentManager;
 import base.ExtentReport;
 import base.Util;
+import base.driver.DriverFactory;
+import base.driver.PageDriver;
 
 public class BaseTest {
     WebDriverWait wait;

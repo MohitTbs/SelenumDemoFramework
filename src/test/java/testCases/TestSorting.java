@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import base.Util;
-import base.driver.BaseTest;
+
 import pages.LoginPage;
 import pages.ProductsPage;
 
@@ -18,7 +18,6 @@ public class TestSorting extends BaseTest{
 	public void Test_PriceSortingAscending() throws Exception {
 		ProductsPage productPage = new ProductsPage();
 		LoginPage loginPage = new LoginPage();
-		Util.logger.info("Hello there");
 		loginPage.login(); // valid login
 		Thread.sleep(2000);
 

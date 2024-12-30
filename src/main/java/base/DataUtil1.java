@@ -19,7 +19,7 @@ import org.testng.annotations.DataProvider;
 
 public class DataUtil1 {
 
-	public static String TESTDATA_SHEET_PATH = "test_data1.xlsx";
+	public static String TESTDATA_SHEET_PATH = "./src/test/resources/testdata/test_data1.xlsx";
 	public static XSSFWorkbook book;
 	public static XSSFSheet sheet;
 
